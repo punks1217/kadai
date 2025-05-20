@@ -1,33 +1,40 @@
-/* 全体の基本設定 */
+/* ページ全体の基本設定 */
 body {
   font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #f0f0f0;
   margin: 0;
+  padding: 20px;
 }
 
+/* コンテナで全体の最大幅を調整・中央寄せ */
 .container {
-  max-width: 400px;
-  margin: auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* 各セクションの枠・角丸・影 */
-.section {
+/* 見出し */
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* 各セクションのスタイル */
+section {
+  background-color: #fff;
   border: 1px solid #007bff;
   border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 15px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* 入力欄とボタン */
+/* 共通の入力欄とボタン */
 input {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
-  box-sizing: border-box;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 button {
@@ -38,7 +45,12 @@ button {
   box-sizing: border-box;
 }
 
-/* 各アイテムのスタイル */
+/* 各リストエリア */
+#taskList, #checklist, #sharedMemo {
+  margin-top: 10px;
+}
+
+/* 各アイテム（作業記録、チェックリスト、共有メモ）のスタイル */
 .task-item,
 .checklist-item,
 .memo-item {
@@ -54,53 +66,128 @@ button {
   border-bottom: none;
 }
 
-/* テキスト部分：改行の最適化 */
+/* テキスト部分 */
 .item-text {
   flex: 1;
   white-space: normal;
   overflow-wrap: break-word;
-  word-break: keep-all;
-  writing-mode: horizontal-tb;
   line-height: 20px;
 }
 
-/* ----- チェックリスト専用のスタイル ----- */
-.checklist-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.checklist-item input[type="checkbox"] {
-  flex-shrink: 0;
-  width: 16px;   /* 先に小さくした場合と合わせる */
-  height: 16px;
-  margin-right: 8px;
-  vertical-align: middle;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  -o-transform: scale(0.8);
-  transform: scale(0.8);
-  transform-origin: left center;
-}
-
-/* ----- アイコンコンテナ ----- */
+/* アイコンコンテナ */
 .icon-container {
   display: flex;
-  flex-direction: row;
   gap: 4px;
   margin-left: auto;
   flex-shrink: 0;
 }
 
-.delete-btn,
-.copy-btn {
+/* チェックリスト用チェックボックス */
+.checklist-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* 削除・コピー用ボタン */
+.delete-btn, .copy-btn {
   padding: 4px 8px;
   font-size: 14px;
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+/* チャット応援システムのスタイル（修正版） */
+#chatContainer {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 300px;  /* 高さはお好みで調整 */
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* チャットメッセージをブロック要素として縦に積み上げる */
+.user-message,
+.bot-message {
+  display: block;         /* 横並びならず、ブロックレベル要素として表示 */
+  margin: 8px 0;          /* 上下の隙間 */
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+/* 各メッセージのラッパー：個別のブロック行として積むため、各ラッパーは自動で新しい行に配置 */
+.message-wrapper {
+  display: flex;        /* 内部のメッセージをフレックスコンテナとする */
+  margin: 4px 0;        /* 上下余白を少なめに */
+}
+
+/* ユーザー発言用ラッパー：右寄せ */
+.user-wrapper {
+  justify-content: flex-end;
+}
+
+/* ボット発言用ラッパー：左寄せ */
+.bot-wrapper {
+  justify-content: flex-start;
+}
+
+/* メッセージ自体のスタイル：内容に合わせた幅に */
+.user-message,
+.bot-message {
+  display: inline-block;   
+  padding: 6px 8px;       /* 適度な余白 */
+  border-radius: 8px;
+  max-width: 80%;         /* 長文のときは最大80%まで広がる */
+  line-height: 1.2;
+}
+
+/* ユーザーのメッセージの色設定 */
+.user-message {
+  background-color: #e6f0ff;
+  color: #003399;
+}
+
+/* ボットのメッセージの色設定 */
+.bot-message {
+  background-color: #e6ffe6;
+  color: #006600;
+}
+
+
+
+
+/* 既存の #chatInputArea の設定に align-items: center を追加 */
+#chatInputArea {
+  display: flex;
+  align-items: center;  /* これで子要素（入力欄と送信ボタン）が垂直中央になる */
+  gap: 5px;
+}
+
+/* 入力欄側の余分なマージンをリセットし、vertical-align を指定 */
+#chatInput {
+  flex: 1;                /* 入力欄が余った幅を占有 */
+  padding: 10px;
+  margin: 0;              /* 余白のリセット */
+  vertical-align: middle; /* 基本的には flex 使っているので不要ですが、念のため */
+  box-sizing: border-box; /* パディング含めて幅指定 */
+}
+
+/* 送信ボタンも余分な余白がないように調整 */
+#sendChatButton {
+  width: 70px;              /* 固定幅（お好みで調整） */
+  padding: 10px;
+  margin: 0;                /* 余計なマージンのリセット */
+  vertical-align: middle;   /* 念のため設定 */
+  box-sizing: border-box;
+  cursor: pointer;
+  /* ※背景色やフォント色は元の設定が適用されるため、そのまま */
+    background-color: #007bff !important; /* 優先度を上げて青色に */
+  color: #fff !important;               /* 白文字に */
+  border: 1px solid #007bff !important;  /* 枠線も青色に */
+  border-radius: 4px;                    /* 角丸はそのまま */
 }
