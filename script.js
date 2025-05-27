@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function getWeather(city = "Osaka") {
-    const apiKey = "YOUR_API_KEY"; // 有効なAPIキーに置き換えてください
+    const apiKey = "b20e189988962253a464c08716033acf"; // 有効なAPIキーに置き換えてください
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ja`;
     try {
       const response = await fetch(url);
