@@ -106,6 +106,7 @@ button {
   padding: 10px;
   height: 300px;  /* 高さはお好みで調整 */
   overflow-y: auto;
+  scroll-behavior: smooth;
   margin-bottom: 10px;
 }
 
